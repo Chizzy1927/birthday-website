@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        .dancing-script { font-family: 'Dancing Script', cursive; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 25%, #ffe0f0 50%, #fff0f8 75%, #f0f8ff 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .heart-grow {
+            animation: heartGrow 2s ease-in-out infinite;
+        }
+        
+        @keyframes heartGrow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- background audio (invisible, autoplay)-->
+     <audio id = "songAudio" loop>
+        <source src="Daniel Caesar - Best Part (Audio) ft. H.E.R..mp3" type="audio/mpeg">
+        browser does not support audio element.
+     </audio>
+    <!-- Confetti Animation -->
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-10"></div>
+    
+    <!-- Header -->
+    <div class="text-center py-12">
+        <h1 class="dancing-script text-4xl md:text-6xl text-pink-600 font-bold mb-8 animate-pulse">Happy Birthday My Love! 👑</h1>
+        <p class="poppins text-lg md:text-xl text-pink-700 mb-8">To my beautiful queen 👑</p>
+        <div class="text-6xl mb-8 heart-grow">🌸 ❤️ 🦋 ✨</div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 space-y-8">
+        
+        <!-- Love Letter Card -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-3xl p-8 shadow-2xl card-hover">
+            <h2 class="dancing-script text-3xl text-pink-700 font-bold mb-6 text-center">My Beautiful Queen ✨</h2>
+            <div class="poppins text-pink-800 leading-relaxed space-y-4">
+                <p>Ifunanya, today the world celebrates you, but I get the privilege of celebrating you every single day. From the crown of your hair to the soles of your feet, I am deeply, completely, and truly in love with you. You are, without a doubt, the most beautiful woman to ever grace this earth, both inside and out.</p>
+                <p>I am so proud of the woman you’re becoming at just 20. You’ve finished school strong, graduating with such a spectacular result, and now you’re chasing your dreams with so much passion and consistency. Your journey in content creation is just the beginning of something truly amazing. I believe with all my heart that you’ll shine so bright as an influencer and beyond. You inspire me every day, especially when I feel discouraged. You remind me to keep going, and that alone is a blessing I’ll never take for granted.</p>
+                <p>You have the kindest, most loving heart. You’re emotional, caring, and endlessly encouraging. Truly, everyone who gets to know you is lucky, and I know God has so many great things in store for you.</p>
+                <p>To me, you’ll always be IFUNANYA:</p>
+                
+                <ul class="list-none space-y-1 font-semibold">
+                     <li>I - Inspiring ✨</li>
+                     <li>F - Faithful ❤️</li>
+                     <li>U - Unbelievably Beautiful 🌹</li>
+                     <li>N - Nurturing 🌸</li>
+                     <li>A - Ambitious 🌟</li>
+                     <li>N - Natural Light 🌞</li>
+                     <li>Y - Your Heart of Gold 💛</li>
+                     <li>A - Amazing in Every Way 🌍</li>
+                </ul>
+
+                
+                <p class="text-center font-semibold text-pink-700">Happy Birthday, my love! Here's to another year of beautiful memories together! 💕</p>
+            </div>
+        </div>
+        
+        <!-- Interactive Birthday Cake -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-3xl p-8 shadow-2xl card-hover">
+            <h3 class="dancing-script text-3xl text-pink-700 font-bold mb-6 text-center">Make a Wish Queen! ✨</h3>
+            <div id="cake" class="text-8xl mb-6 cursor-pointer transition-transform hover:scale-110 text-center floating">
+                🎂
+            </div>
+            <div class="text-center">
+                <button id="blowCandles" class="poppins bg-gradient-to-r from-pink-400 to-rose-500 text-white px-8 py-3 rounded-full font-semibold hover:from-pink-500 hover:to-rose-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    Blow Out the Candles! 🕯️✨
+                </button>
+            </div>
+            <div id="wishMessage" class="mt-4 text-pink-700 font-semibold text-center hidden">
+                ✨ Your wish has been made! May God grant all your heart desires🙏✨
+            </div>
+        </div>
+        
+        <!-- Memory Cards Grid -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Sweet Memories (Slideshow) -->
+            <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-2xl p-6 shadow-xl card-hover">
+                <div class="text-4xl mb-4 text-center">📸</div>
+                <h4 class="dancing-script text-2xl text-pink-700 font-bold mb-3 text-center">Sweet Memories</h4>
+
+                <!--Slideshow-->
+                <p class="poppins text-pink-800 text-sm text-center">Every moment with you becomes a treasured memory that I hold close to my heart forever.</p>
+            </div>
+               
+            <!-- Amazing Future -->
+            <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-2xl p-6 shadow-xl card-hover">
+                <div class="text-4xl mb-4 text-center">🌟</div>
+                <h4 class="dancing-script text-2xl text-pink-700 font-bold mb-3 text-center">Amazing Future</h4>
+                <p class="poppins text-pink-800 text-sm text-center">I'm so proud of your incredible growth, especially with your content creation. Your talent and dedication inspire me every day. The future holds so many amazing things for you!</p>
+            </div>
+            
+            <!-- My Love -->
+            <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-2xl p-6 shadow-xl card-hover">
+                <div class="text-4xl mb-4 text-center">👑</div>
+                <h4 class="dancing-script text-2xl text-pink-700 font-bold mb-3 text-center">My Love</h4>
+                <p class="poppins text-pink-800 text-sm text-center">You are my everything, my heart, my soul, and my greatest blessing. I love you more than words can express.</p>
+            </div>
+        </div>
+        
+        <!-- Our Song Lyrics -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-3xl p-8 shadow-2xl card-hover">
+            <h3 class="dancing-script text-3xl text-pink-700 font-bold mb-4 text-center">My Song For This Special Day 🎵</h3>
+            <p class="poppins text-pink-800 text-center mb-6">There's no song that can fully capture how much you mean to me, but these lyrics from "Best Part" by Daniel Caesar come close...</p>
+            <div class="bg-white bg-opacity-50 rounded-2xl p-6 border border-pink-200">
+                <p class="dancing-script text-2xl text-pink-700 text-center mb-4">♪ "Best Part" ♪</p>
+                <div class="poppins text-pink-800 italic text-center space-y-3 leading-relaxed">
+                    <p>"You're the coffee that I need in the morning"</p>
+                    <p>"You're my sunshine in the rain when it's pouring"</p>
+                    <p>"Won't you be my best part, best part of me"</p>
+                    <p>"You're already the voice inside my head"</p>
+                    <p>"I miss you already and you're not even gone"</p>
+                </div>
+                <p class="text-center text-pink-600 text-sm mt-4">- Daniel Caesar</p>
+            </div>
+        </div>
+        
+        <!-- Birthday Wishes -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-300 rounded-3xl p-8 shadow-2xl card-hover text-center">
+            <h3 class="dancing-script text-3xl text-pink-700 font-bold mb-6">Happy 20th Birthday, My Queen! 🎉</h3>
+            <div class="text-6xl mb-6 sparkle">🎈🎁🎈</div>
+            <p class="poppins text-pink-800 text-lg">May this new chapter of your life be filled with endless love, joy, success, and all the beautiful things you deserve. You are absolutely amazing, and I'm so grateful to celebrate another year of your wonderful existence!</p>
+            <div class="mt-6 text-4xl">💕✨🌟✨💕</div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="text-center py-12">
+        <p class="poppins text-pink-700 text-lg">With all my love, always and forever 💖</p>
+    </div>
+    
+    <script>
+        // Confetti Animation
+        function createConfetti() {
+            const colors = ['#f472b6', '#ec4899', '#be185d', '#db2777', '#f9a8d4', '#fce7f3'];
+            const confettiContainer = document.getElementById('confetti-container');
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confettiContainer.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Blow candles & play audio functionality
+        document.getElementById('blowCandles').addEventListener('click', function() {
+            const cake = document.getElementById('cake');
+            const wishMessage = document.getElementById('wishMessage');
+            const button = this;
+            const audio = document.getElementById('songAudio');
+            //play audio
+            audio.play();
+
+            // Change cake to celebration
+            cake.textContent = '🎉';
+            cake.classList.add('animate-bounce');
+            
+            // Show wish message
+            wishMessage.classList.remove('hidden');
+            
+            // Update button
+            button.textContent = '✨ Wish Made! ✨';
+            button.disabled = true;
+            button.classList.add('opacity-75');
+            
+            // Create confetti
+            createConfetti();
+            
+            // Reset after 5 seconds
+            setTimeout(() => {
+                cake.textContent = '🎂';
+                cake.classList.remove('animate-bounce');
+                wishMessage.classList.add('hidden');
+                button.textContent = 'Blow Out the Candles! 🕯️✨';
+                button.disabled = false;
+                button.classList.remove('opacity-75');
+            }, 5000);
+        });
+        
+        // Add some sparkle effects on page load
+        setTimeout(() => {
+            createConfetti();
+        }, 1000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977e75c0c5991454',t:'MTc1NjY2MzU2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
